@@ -7,8 +7,10 @@ class Login extends Component {
         super();
         this.state = {
             response: [],
-            email: '',
-            password: ''
+            user: {
+                email: "",
+                password: ""
+            }
         };
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleEmail = this.handleEmail.bind(this);
@@ -17,23 +19,39 @@ class Login extends Component {
 
     handleSubmit(event){
         event.preventDefault();
-        axios.post('/api/login',[this.state.email,this.state.password]).then( response =>{
-            console.log(response.data);
-        })
+        console.log(this.state.user)
+        axios.post('/api/login',this.state.user).then( response =>{
+            // console.log(response.data);
+            let appState = {
+                isAuthenticated: true,
+                token: response.data.access_token
+            }
+            localStorage["authorization"] = JSON.stringify(appState);
+            console.log("login success")
+        }).catch( error =>{
+            console.log(error)
+        });
     }
     handleEmail(e){
         e.preventDefault();
-        this.setState({
-            email : e.target.value
-        });
-        console.log(this.state.email)
+        let value = e.target.value;
+       this.setState(prevState => ({
+           user: {
+               ...prevState.user,
+               email: value
+           }
+       }));
+        console.log(this.state.user.email)
     }
     handlePassword(e){
         e.preventDefault();
-        this.setState({
-            password : e.target.value
-        });
-        console.log(this.state.password)
+        let value = e.target.value
+        this.setState(prevState => ({
+            user: {
+                ...prevState.user, password: value
+            }
+        }));
+        console.log(this.state.user.password)
     }
 
     render() {
