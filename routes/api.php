@@ -14,23 +14,23 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+// Route::middleware('auth:api')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
 
-Route::post('login','AuthController@login');
-Route::post('register','AuthController@register');
-Route::get('/staff','StaffController@index');
-Route::post('/staff','StaffController@store');
-Route::group(['middleware' => 'auth:api'], function () {
-    Route::get('logout','AuthController@logout');
-    // Route::get('user','UserController@user');
-});
-Route::get('/send',function (){
-    Mail::send('emails.passwordReset', [], function ($message) {
-        $message->from('john@johndoe.com', 'John Doe');
-        $message->to('yshamrat@gmail.com', 'Yasin Shamrat');
-        $message->subject('Subject');
+// Route::post('login','AuthController@login');
+// Route::post('register','AuthController@register');
+// Route::get('/staff','StaffController@index');
+// Route::post('/staff','StaffController@store');
+// Route::group(['middleware' => 'auth:api'], function () {
+//     Route::get('logout','AuthController@logout');
+//     // Route::get('user','UserController@user');
+// });
+// Route::get('/send',function (){
+//     Mail::send('emails.passwordReset', [], function ($message) {
+//         $message->from('john@johndoe.com', 'John Doe');
+//         $message->to('yshamrat@gmail.com', 'Yasin Shamrat');
+//         $message->subject('Subject');
         
-    });
-});
+//     });
+// });
