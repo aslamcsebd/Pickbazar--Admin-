@@ -17,4 +17,18 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/', 'HomeController@index')->name('admin.home');
+
+// Category Routes
+Route::get('/categories', 'CategoryController@index')->name('category.index');
+// Create routes for Category create, read and update
+
+// sub category routes
+Route::get('/categories/{id}/sub-categories', 'SubCategoryController@index')->name('sub-category.index');
+// Create routes for Category create, read and update
+
+// Product Routes
+Route::get('/products', 'ProductController@index')->name('product.index');
+// Create routes for product create, read and update
+
+
