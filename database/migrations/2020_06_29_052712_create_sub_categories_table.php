@@ -17,7 +17,7 @@ class CreateSubCategoriesTable extends Migration
             $table->id();
             $table->bigInteger('category_id')->unsigned();
             $table->string('name');
-            $table->string('description');
+            $table->string('image');
             $table->timestamps();
         });
     }

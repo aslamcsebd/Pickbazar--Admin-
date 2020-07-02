@@ -21,8 +21,16 @@ Route::get('/', 'HomeController@index')->name('admin.home');
 
 // Category Routes
 Route::get('categories', 'CategoryController@categories')->name('admin.categories');
+Route::post('physical-category', 'CategoryController@physical_category');
+Route::get('category-sub', 'CategoryController@category_sub');
+Route::get('product-list', 'CategoryController@product_list');
+Route::get('product-detail', 'CategoryController@product_detail');
+Route::get('add-product', 'CategoryController@add_product');
 
-Route::post('physical_category', 'CategoryController@physical_category');
+
+
+
+
 // Create routes for Category create, read and update
 
 // Route::get('category', 'Admin_Controller@category')->name('category');

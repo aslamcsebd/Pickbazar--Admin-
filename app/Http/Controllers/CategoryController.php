@@ -43,6 +43,24 @@ class CategoryController extends Controller{
       }
    }
 
+   
+
+
+
+
+   public function category_sub(){
+      return view('admin.category-sub');
+   }
+    public function product_list(){
+      return view('admin.product-list');
+   }
+   public function product_detail(){
+      return view('admin.product-detail');
+   } 
+   public function add_product(){
+      return view('admin.add-product');
+   }
+
 
 
 }
