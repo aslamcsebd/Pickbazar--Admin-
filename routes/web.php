@@ -20,8 +20,13 @@ Auth::routes();
 Route::get('/', 'HomeController@index')->name('admin.home');
 
 // Category Routes
-Route::get('/categories', 'CategoryController@index')->name('category.index');
+Route::get('categories', 'CategoryController@categories')->name('admin.categories');
+
+Route::post('physical_category', 'CategoryController@physical_category');
 // Create routes for Category create, read and update
+
+// Route::get('category', 'Admin_Controller@category')->name('category');
+
 
 // sub category routes
 Route::get('/categories/{id}/sub-categories', 'SubCategoryController@index')->name('sub-category.index');

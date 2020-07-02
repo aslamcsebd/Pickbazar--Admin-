@@ -29,8 +29,27 @@
          <div class="col-sm-12">
             <div class="card">
                <div class="card-header">
-                  <h5>Products Category</h5>
+                  <h5>Products Category</h5>    
+
+                  @if (session('success'))
+                     <div class="alert alert-success">
+                        <strong>Success!</strong> {{ session('success') }}
+                     </div>
+                  @endif
+                  @if (session('fail'))
+                     <div class="alert alert-danger">
+                        <strong>Sorry!</strong> {{ session('fail') }}
+                     </div>
+                  @endif
+                  @if ($errors-> all())
+                     <div class="alert alert-danger">
+                        @foreach ($errors->all() as $error)
+                        <li>{{$error}}</li>
+                        @endforeach
+                     </div>
+                  @endif 
                </div>
+
                <div class="card-body">
                   <div class="btn-popup pull-right">
                      <button type="button" class="btn btn-primary" data-toggle="modal" data-original-title="test" data-target="#exampleModal">Add Category</button>
@@ -42,23 +61,25 @@
                                  <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
                               </div>
                               <div class="modal-body">
-                                 <form class="needs-validation">
+                                 
+                                 <form action="{{ url('physical_category') }}" method="post" enctype="multipart/form-data" class="needs-validation" >
+                                    @csrf
                                     <div class="form">
                                        <div class="form-group">
                                           <label for="validationCustom01" class="mb-1">Category Name :</label>
-                                          <input class="form-control" id="validationCustom01" type="text">
+                                          <input name="category_name" class="form-control" id="validationCustom01" type="text" value="{{ old('category_name')}}">
                                        </div>
                                        <div class="form-group mb-0">
                                           <label for="validationCustom02" class="mb-1">Category Image :</label>
-                                          <input class="form-control" id="validationCustom02" type="file">
+                                          <input name="category_image" class="form-control" id="validationCustom02" type="file">
                                        </div>
                                     </div>
+                                    <div class="modal-footer">
+                                       <button class="btn btn-primary" type="submit">Save</button>
+                                       <button class="btn btn-secondary" type="button" data-dismiss="modal">Close</button>
+                                    </div>                                                           
                                  </form>
-                              </div>
-                              <div class="modal-footer">
-                                 <button class="btn btn-primary" type="button">Save</button>
-                                 <button class="btn btn-secondary" type="button" data-dismiss="modal">Close</button>
-                              </div>
+                              </div>      
                            </div>
                         </div>
                      </div>

@@ -23,7 +23,7 @@
                   <span>Physical</span> <i class="fa fa-angle-right pull-right"></i>
                </a>
                <ul class="sidebar-submenu">
-                  <li><a href="{{ url('category') }}"><i class="fa fa-circle"></i>Category</a></li>
+                  <li><a href="{{ url('categories') }}"><i class="fa fa-circle"></i>Category</a></li>
                   <li><a href="{{ url('category-sub') }}"><i class="fa fa-circle"></i>Sub Category</a></li>
                   <li><a href="{{ url('product-list') }}"><i class="fa fa-circle"></i>Product List</a></li>
                   <li><a href="{{ url('product-detail') }}"><i class="fa fa-circle"></i>Product Detail</a></li>
