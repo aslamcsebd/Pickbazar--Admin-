@@ -62,13 +62,18 @@
                               </div>
                               <div class="modal-body">
                                  
-                                 <form action="{{ url('physical_category') }}" method="post" enctype="multipart/form-data" class="needs-validation" >
+                                 <form action="{{ url('physical-category') }}" method="post" enctype="multipart/form-data" class="needs-validation" >
                                     @csrf
                                     <div class="form">
                                        <div class="form-group">
                                           <label for="validationCustom01" class="mb-1">Category Name :</label>
                                           <input name="category_name" class="form-control" id="validationCustom01" type="text" value="{{ old('category_name')}}">
                                        </div>
+                                       <div class="form-group">
+                                          <label for="validationCustom01" class="mb-1">Category Details :</label>
+                                          <textarea name="description" class="form-control" id="validationCustom01" type="text" value="{{ old('description')}}"></textarea>
+                                       </div>
+
                                        <div class="form-group mb-0">
                                           <label for="validationCustom02" class="mb-1">Category Image :</label>
                                           <input name="category_image" class="form-control" id="validationCustom02" type="file">

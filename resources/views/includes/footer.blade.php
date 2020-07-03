@@ -158,6 +158,29 @@
       });
    </script>
 
+   
+   {{-- ajaxData --}}
+   <script type="text/javascript">
+      $(document).ready(function(){
+         $('#Category_Id').on('change',function(){
+            var categoryId = $(this).val();
+            if(categoryId){
+               $.ajax({
+                  type:'POST',
+                  url:'{{ asset('ajax/ajaxData.blade.php') }}',
+                  data:'category_id='+categoryId,
+                  success:function(html){
+                     $('#Sub_Category_Id').html(html);
+                  }
+               }); 
+            }else{
+               $('#Sub_Category_Id').html('<option value="">Select category first</option>');
+            }
+         });
+      });
+   </script>
+
+
 
 
 

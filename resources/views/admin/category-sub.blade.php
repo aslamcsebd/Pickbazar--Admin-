@@ -31,6 +31,23 @@
                <div class="card-header">
                   <h5>Products Sub Category</h5>
                </div>
+               @if (session('success'))
+                     <div class="alert alert-success">
+                        <strong>Success!</strong> {{ session('success') }}
+                     </div>
+                  @endif
+                  @if (session('fail'))
+                     <div class="alert alert-danger">
+                        <strong>Sorry!</strong> {{ session('fail') }}
+                     </div>
+                  @endif
+                  @if ($errors-> all())
+                     <div class="alert alert-danger">
+                        @foreach ($errors->all() as $error)
+                        <li>{{$error}}</li>
+                        @endforeach
+                     </div>
+                  @endif 
                <div class="card-body">
                   <div class="btn-popup pull-right">
                      <button type="button" class="btn btn-primary" data-toggle="modal" data-original-title="test" data-target="#exampleModal">Add Sub Category</button>
@@ -42,23 +59,33 @@
                                  <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
                               </div>
                               <div class="modal-body">
-                                 <form class="needs-validation">
+                                 <form action="{{ url('physical-sub-category') }}" method="post" enctype="multipart/form-data" class="needs-validation">
+                                    @csrf
                                     <div class="form">
                                        <div class="form-group">
+                                          <label for="validationCustom01" class="mb-1">Category Name :</label>
+                                             <select name="category_id" id="singerType" class="form-control" value="{{ old('category_id')}}">
+                                                <option value="">Select Now</option>           
+                                                   @foreach($categories as $category)
+                                                      <option value="{{$category->id}}">{{$category->name}}</option>
+                                                   @endforeach
+                                             </select>                                     
+                                       </div>
+                                       <div class="form-group">
                                           <label for="validationCustom01" class="mb-1">Sub Category Name :</label>
-                                          <input class="form-control" id="validationCustom01" type="text">
+                                          <input name="sub_category_name" class="form-control" id="validationCustom01" type="text" value="{{ old('sub_category_name')}}">
                                        </div>
                                        <div class="form-group mb-0">
                                           <label for="validationCustom02" class="mb-1">Sub Category Image :</label>
-                                          <input class="form-control" id="validationCustom02" type="file">
+                                          <input name="sub_category_image" class="form-control" id="validationCustom02" type="file">
                                        </div>
                                     </div>
-                                 </form>
-                              </div>
-                              <div class="modal-footer">
-                                 <button class="btn btn-primary" type="button">Save</button>
+                                    <div class="modal-footer">
+                                 <button class="btn btn-primary" type="submit">Save</button>
                                  <button class="btn btn-secondary" type="button" data-dismiss="modal">Close</button>
                               </div>
+                                 </form>
+                              </div>                              
                            </div>
                         </div>
                      </div>

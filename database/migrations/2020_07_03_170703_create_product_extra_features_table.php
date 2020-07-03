@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddImageTable extends Migration
+class CreateProductExtraFeaturesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,12 @@ class AddImageTable extends Migration
      */
     public function up()
     {
-        Schema::create('images', function (Blueprint $table) {
+        Schema::create('product_extra_features', function (Blueprint $table) {
             $table->id();
-            $table->string('image');
-            $table->morphs('imageable');
+            $table->bigInteger('sub_category_id');
+            $table->string('size');
+            $table->string('color');
+            $table->string('quantity');            
             $table->timestamps();
         });
     }
@@ -28,6 +30,6 @@ class AddImageTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('images');
+        Schema::dropIfExists('product_extra_features');
     }
 }
