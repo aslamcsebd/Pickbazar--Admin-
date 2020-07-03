@@ -30,7 +30,7 @@
             <div class="card">
                <div class="card-header">
                   <h5>Products Category</h5>    
-
+                  <small>List of all categories only</small>
                   @if (session('success'))
                      <div class="alert alert-success">
                         <strong>Success!</strong> {{ session('success') }}

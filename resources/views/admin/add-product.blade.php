@@ -72,14 +72,29 @@
                               </div>
                            </div>
                            <div class="form">
-                              <div class="form-group row">
-                                 <label for="exampleFormControlSelect1" class="col-xl-3 col-sm-4 mb-0">Select Size :</label>
-                                 <select class="form-control digits col-xl-8 col-sm-7" id="exampleFormControlSelect1">
-                                    <option>Small</option>
-                                    <option>Medium</option>
-                                    <option>Large</option>
-                                    <option>Extra Large</option>
-                                 </select>
+                              <div class="row">
+                                 <div class="col card">
+                                    <div class="card-header">
+                                       <h5>Add Extra Details</h5>
+                                       <div class="text-right">
+                                          <button type="button" id="addExtraField" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i></button>
+                                       </div>
+                                    </div>
+                                    <div class="card-body" id="productExtraBody">
+                                       <div class="row m-1">
+                                          <div class="col">
+                                             <input type="text" class="form-control" name='size[]' placeholder="Size">
+                                          </div>
+                                          <div class="col">
+                                             <input type="text" class="form-control" name='color[]' placeholder="Color">
+                                          </div>
+                                          <div class="col">
+                                             <input type="text" class="form-control" name='quantity[]' placeholder="Quantity">
+                                          </div>
+                                       </div>
+                                    </div>
+                                    
+                                 </div>
                               </div>
                               <div class="form-group row">
                                  <label class="col-xl-3 col-sm-4 mb-0">Total Products :</label>
@@ -111,4 +126,16 @@
    <!-- Container-fluid Ends-->
 </div>
 
+@endsection
+
+@section('script')
+
+    <script type="text/javascript">
+       $(document).on('click','#addExtraField',function (e) {
+          e.preventDefault()  
+          console.log('here')
+          var html = "<div class='row m-1'><div class='col'><input type='text' class='form-control' name='size[]' placeholder='Size'></div><div class='col'><input type='text' class='form-control' name='color[]' placeholder='Color'></div><div class='col'><input type='text' class='form-control' name='quantity[]' placeholder='Quantity'></div></div>"
+          $('#productExtraBody').append(html)
+       });
+    </script>
 @endsection
