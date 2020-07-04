@@ -16,7 +16,9 @@ class CategoryController extends Controller{
 
 // categories
    public function categories(){
-      return view('admin.category');
+
+      $categories = Category::all();
+      return view('admin/category', compact('categories'));
    }
 
    public function physical_category(Request $request) {
@@ -39,7 +41,7 @@ class CategoryController extends Controller{
                $image->image = $fileName;
             $category->image()->save($image);
          }
-      return back()->with('success','Insert successfully');   
+      return back()->with('success','Insert successfully');
       
    }
 
@@ -47,7 +49,8 @@ class CategoryController extends Controller{
    public function category_sub(){
 
       $categories = Category::all();
-      return view('admin/category-sub', compact('categories'));
+      $subCategories = SubCategory::simplePaginate(10);      
+      return view('admin/category-sub', compact('categories', 'subCategories'));
    }
 
    public function physical_sub_category(Request $request) {
@@ -55,11 +58,12 @@ class CategoryController extends Controller{
       $validated = $request-> validate([
          'category_id'=> 'required',
          'name'=> 'required|string',
-         'sub_category_image'=> 'nullable|image|mimes:mimes:jpeg,jpg,png'
+         // 'sub_category_image'=> 'nullable|image|mimes:mimes:jpeg,jpg,png'
       ]);
 
       
       $subCategories = SubCategory::create($validated);
+
       if ($request->hasFile('sub_category_image')) {  //please link image upper... use Image;
          $image_upload=$request->sub_category_image;
          $fileName=$request->name.".".$image_upload->getClientOriginalExtension();
@@ -73,8 +77,10 @@ class CategoryController extends Controller{
       
    }
 
+// product_list
    public function product_list(){
-      return view('admin.product-list');
+      $product_lists = Product::all();
+      return view('admin/product-list', compact('product_lists'));
    }
    public function product_detail(){
       return view('admin.product-detail');

@@ -73,6 +73,8 @@
 
     <!-- Datatables css-->
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/datatables.css') }}">
+    <link rel="stylesheet" href="//cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
+
 
     <!-- Datepicker css-->
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/date-picker.css') }}">

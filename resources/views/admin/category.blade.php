@@ -31,26 +31,7 @@
                <div class="card-header">
                   <h5>Products Category</h5>    
                   <small>List of all categories only</small>
-                  @if (session('success'))
-                     <div class="alert alert-success">
-                        <strong>Success!</strong> {{ session('success') }}
-                     </div>
-                  @endif
-                  @if (session('fail'))
-                     <div class="alert alert-danger">
-                        <strong>Sorry!</strong> {{ session('fail') }}
-                     </div>
-                  @endif
-                  @if ($errors-> all())
-                     <div class="alert alert-danger">
-                        @foreach ($errors->all() as $error)
-                        <li>{{$error}}</li>
-                        @endforeach
-                     </div>
-                  @endif 
-               </div>
 
-               <div class="card-body">
                   <div class="btn-popup pull-right">
                      <button type="button" class="btn btn-primary" data-toggle="modal" data-original-title="test" data-target="#exampleModal">Add Category</button>
                      <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -89,9 +70,55 @@
                         </div>
                      </div>
                   </div>
-                  <div class="table-responsive">
-                     <div id="basicScenario" class="product-physical"></div>
-                  </div>
+                     @if (session('success'))
+                        <div class="alert alert-success">
+                           <strong>Success!</strong> {{ session('success') }}
+                        </div>
+                     @endif
+                     @if (session('fail'))
+                        <div class="alert alert-danger">
+                           <strong>Sorry!</strong> {{ session('fail') }}
+                        </div>
+                     @endif
+                     @if ($errors-> all())
+                        <div class="alert alert-danger">
+                           @foreach ($errors->all() as $error)
+                           <li>{{$error}}</li>
+                           @endforeach
+                        </div>
+                     @endif 
+               </div>
+
+               <div class="card-body">
+                     <table class="table table-bordered">
+                        <thead class="g-info">
+                           <tr class="text-center">
+                              <th>Image</th>
+                              <th>Name</th>
+                              {{-- <th>Total Sub Category</th> --}}
+                              <th>Status</th>
+                              <th>Edit</th>
+                           </tr>
+                        </thead>
+                        <tbody>
+                           @foreach($categories as $category)  {{-- foreach don't have @empty option --}}
+                              <tr class="text-center">
+                                 {{-- <td>{{$loop->index + $SingerLists->firstItem()}}</td> --}}
+                                 <td><img src="{{ asset('category_image') }}/{{$category->image}}" class="img-thumbnail"></td>    
+                                 <td>{{ $category->name}}</td>
+                                 {{-- <td>{{ $category->Category__relationTo__subCategory->name}}</td> --}}
+                                 <td>Status</td>
+                                 <td width="10%">
+                                    <div class="btn-group" role="group">
+                                       <a href="#" class="btn btn-sm btn-info">Edit</a>
+                                                       
+                                       <a href="#" class="btn btn-sm btn-danger">Delete</a>
+                                    </div>        
+                                 </td>
+                              </tr>
+                           @endforeach                                           
+                        </tbody>
+                     </table>
                </div>
             </div>
          </div>

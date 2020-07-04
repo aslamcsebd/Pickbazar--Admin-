@@ -15,4 +15,7 @@ class Category extends Model
     {
         return $this->morphOne(SiteImage::class, 'imageable');
     }
+
+   
+
 }

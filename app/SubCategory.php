@@ -14,4 +14,10 @@ class SubCategory extends Model
     {
         return $this->morphOne(SiteImage::class, 'imageable');
     }
+
+    function subCategory__relationTo__category(){
+      return $this->hasOne('App\Category', 'id', 'category_id');
+      // N:B: hasOne('Destination model', 'Destination model id(primary key)', 'to this model foreign key');      
+   }
+   
 }

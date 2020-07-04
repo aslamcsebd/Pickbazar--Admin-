@@ -94,6 +94,8 @@
 <script src="{{ asset('assets/js/datatables/jquery.dataTables.min.js') }}"></script>
 <script src="{{ asset('assets/js/datatables/custom-basic.js') }}"></script>
 
+<script type="text/javascript" src="//cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+
 <!-- Jsgrid js-->
 <script src="{{ asset('assets/js/jsgrid/jsgrid.min.js') }}"></script>
 <script src="{{ asset('assets/js/jsgrid/griddata-manage-product.js') }}"></script>
@@ -181,13 +183,21 @@
    </script>
 
 
+{{-- Datatable --}}
+{{-- <script type="text/javascript">
+   $('.table').DataTable({
+      "lengthMenu": [ [5, 10, 25, 50, -1], [5, 10, 25, 50, "All"] ]
+   });
+</script> --}}
 
+<script type="text/javascript">
+   
+   $(document).ready( function () {
+      $('.table').DataTable();
+   } );
 
-
-
-
-
-
-
-
+   $('.table').dataTable( {
+     "pageLength": 8
+   } );
+</script>
 
