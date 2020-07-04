@@ -87,31 +87,15 @@
                         </div>
                         <div class="col-xl-7 needs-validation add-product-form" novalidate="">
                            {{-- <form class="needs-validation add-product-form" novalidate=""> --}}
-                              <div class="form">
-                                 <div class="form-group mb-3 row">
-                                    <label for="Category_Id" class="col-xl-3 col-sm-4 mb-0">Category Name :</label>
-                                       <select name="category_id" id="Category_Id" class="form-control col-xl-8 col-sm-7" value="{{ old('category_id')}}">
-                                          <option value="">Select Now</option>
-
-                                             <?php
-                                                foreach($categories as $category){
-                                                   echo '<option value="'.$category->id.'">'.$category->name.'</option>';
-                                                   }
-                                             ?>
-
-                                             {{-- @foreach($SubCategories as $SubCategory)
-                                                <option value="{{$SubCategory->id}}">{{$SubCategory->name}}</option>
-                                             @endforeach --}}
-                                       </select>                                     
-                                 </div>
+                              
                                  <div class="form-group mb-3 row">
                                     <label for="Sub_Category_Id" class="col-xl-3 col-sm-4 mb-0">Sub Category Name :</label>
                                        <select name="sub_category_id" id="Sub_Category_Id" class="form-control col-xl-8 col-sm-7" value="{{ old('sub_category_id')}}">
                                           <option value="">Select Now</option>
 
-                                          {{-- @foreach($SubCategories as $category)
+                                          @foreach($subCategories as $category)
                                              <option value="{{$category->id}}">{{$category->name}}</option>
-                                          @endforeach --}}
+                                          @endforeach
                                        </select>                  
                                  </div>
                                  <div class="form-group mb-3 row">

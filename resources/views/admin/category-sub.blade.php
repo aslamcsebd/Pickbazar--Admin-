@@ -65,7 +65,7 @@
                                        <div class="form-group">
                                           <label for="validationCustom01" class="mb-1">Category Name :</label>
                                              <select name="category_id" id="singerType" class="form-control" value="{{ old('category_id')}}">
-                                                <option value="">Select Now</option>           
+                                                <option value="">Select Category</option>           
                                                    @foreach($categories as $category)
                                                       <option value="{{$category->id}}">{{$category->name}}</option>
                                                    @endforeach
@@ -73,7 +73,7 @@
                                        </div>
                                        <div class="form-group">
                                           <label for="validationCustom01" class="mb-1">Sub Category Name :</label>
-                                          <input name="sub_category_name" class="form-control" id="validationCustom01" type="text" value="{{ old('sub_category_name')}}">
+                                          <input name="name" class="form-control" id="validationCustom01" type="text" value="{{ old('sub_category_name')}}">
                                        </div>
                                        <div class="form-group mb-0">
                                           <label for="validationCustom02" class="mb-1">Sub Category Image :</label>

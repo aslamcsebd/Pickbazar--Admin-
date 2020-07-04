@@ -67,7 +67,7 @@
                                     <div class="form">
                                        <div class="form-group">
                                           <label for="validationCustom01" class="mb-1">Category Name :</label>
-                                          <input name="category_name" class="form-control" id="validationCustom01" type="text" value="{{ old('category_name')}}">
+                                          <input name="name" class="form-control" id="validationCustom01" type="text" value="{{ old('name')}}">
                                        </div>
                                        <div class="form-group">
                                           <label for="validationCustom01" class="mb-1">Category Details :</label>

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateProductImagesTable extends Migration
+class RemoveImageCol extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,8 @@ class CreateProductImagesTable extends Migration
      */
     public function up()
     {
-        Schema::create('product_images', function (Blueprint $table) {
-            $table->id();
-            $table->string('image');
-            $table->morphs('imageable');
-            $table->timestamps();
+        Schema::table('sub_categories', function (Blueprint $table) {
+            $table->dropColumn('image');
         });
     }
 
@@ -28,6 +25,8 @@ class CreateProductImagesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('product_images');
+        Schema::table('sub_categories', function (Blueprint $table) {
+            //
+        });
     }
 }

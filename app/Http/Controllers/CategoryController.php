@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Category;
 use App\SubCategory;
-use App\ProductImage;
+use App\SiteImage;
 use App\Product;
 use App\ProductExtraFeatures;
 
@@ -21,34 +21,26 @@ class CategoryController extends Controller{
 
    public function physical_category(Request $request) {
     
-      $request-> validate([
-         'category_name'=> 'required|unique:categories,name',
-         'description'=> 'required',
-         'category_image'=> 'required'
+      $validated = $request->validate([
+         'name'=> 'required|unique:categories,name',
+         'description'=> 'nullable|string',
+         'category_image'=> 'nullable|image|mimes:jpeg,jpg,png'
       ]);
 
-      if (Category::where('name', $request->category_name)->count() > 0) {
-         return back()->with('fail', 'The category name has already been taken.');         
-      }else{
-
+      $category = Category::create($validated);
+         // dd($category);
          if ($request->hasFile('category_image')) {  //please link image upper... use Image;
             $image_upload=$request->category_image;
-            $fileName=$request->category_name.".".$image_upload->getClientOriginalExtension();
+            $fileName= $request->name.".".$image_upload->getClientOriginalExtension();
             Image::make($image_upload)->resize(400,380)->save(base_path('public/category_image/'.$fileName));  
                //Image quality   save(base_path('url'), 50);   this 50% image quality will be save
-
-            Category::insert([
-               'name'=>$request->category_name,
-               'description'=>$request->description,
-               'image'=>$fileName,
-               'created_at'=>date('Y-m-d H:i:s'),
-               'updated_at'=>date('Y-m-d H:i:s')
-            ]);
-         }else{
-            return back()->with('fail','The category image field is required.');
+               
+               $image = new SiteImage;
+               $image->image = $fileName;
+            $category->image()->save($image);
          }
       return back()->with('success','Insert successfully');   
-      }
+      
    }
 
 // sub_category
@@ -60,34 +52,25 @@ class CategoryController extends Controller{
 
    public function physical_sub_category(Request $request) {
  
-      $request-> validate([
+      $validated = $request-> validate([
          'category_id'=> 'required',
-         'sub_category_name'=> 'required|unique:sub_categories,name',
-         'sub_category_image'=> 'required'
+         'name'=> 'required|string',
+         'sub_category_image'=> 'nullable|image|mimes:mimes:jpeg,jpg,png'
       ]);
 
-      if (SubCategory::where('name', $request->sub_category_name)->count() > 0) {
-         return back()->with('fail', 'The Sub category name has already been taken.');         
-      }else{
-
-         if ($request->hasFile('sub_category_image')) {  //please link image upper... use Image;
-            $image_upload=$request->sub_category_image;
-            $fileName=$request->sub_category_name.".".$image_upload->getClientOriginalExtension();
-            Image::make($image_upload)->resize(400,380)->save(base_path('public/sub_category_image/'.$fileName));  
-               //Image quality   save(base_path('url'), 50);   this 50% image quality will be save
-
-            SubCategory::insert([
-               'category_id'=>$request->category_id,
-               'name'=>$request->sub_category_name,
-               'image'=>$fileName,
-               'created_at'=>date('Y-m-d H:i:s'),
-               'updated_at'=>date('Y-m-d H:i:s')
-            ]);
-         }else{
-            return back()->with('fail','The Sub category image field is required.');
-         }
-      return back()->with('success','Insert successfully'); 
+      
+      $subCategories = SubCategory::create($validated);
+      if ($request->hasFile('sub_category_image')) {  //please link image upper... use Image;
+         $image_upload=$request->sub_category_image;
+         $fileName=$request->name.".".$image_upload->getClientOriginalExtension();
+         Image::make($image_upload)->resize(400,380)->save(base_path('public/sub_category_image/'.$fileName));  
+            //Image quality   save(base_path('url'), 50);   this 50% image quality will be save
+         $image = new SiteImage;
+         $image->image = $fileName;
+         $subCategories->image()->save($image);
       }
+   return back()->with('success','Insert successfully'); 
+      
    }
 
    public function product_list(){
@@ -100,66 +83,52 @@ class CategoryController extends Controller{
 
 // Add product
    public function add_product(){
-      $categories = Category::all();      
       $subCategories = SubCategory::all();
-      return view('admin/add-product', compact('categories','subCategories'));
+      return view('admin/add-product', compact('subCategories'));
    } 
 
    public function add_product_item(Request $request){
-     
-      // $request-> validate([
-      //    'imageFile[]'=> 'required',
-      //    'category_id'=> 'required',
-      //    'sub_category_id'=> 'required',
-      //    'title'=> 'required',
-      //    'price'=> 'required',
-      //    'product_code'=> 'required',
-      //    'total_product'=> 'required',
-      //    'slug'=> 'required',
-      //    'isPublished'=> 'required',
-      //    'description'=> 'required'
-      // ]);
-
-      $sub_category_id= $request->sub_category_id;
-      $sub_category_name = SubCategory::find($sub_category_id)->name;
+   //   dd($request->all());
+      $validated = $request-> validate([
+         'imageFile'=> 'required',
+         'imageFile.*'=> 'image|mimes:jpeg,jpg,png',
+         // 'category_id'=> 'required',
+         'sub_category_id'=> 'required',
+         'title'=> 'required',
+         'price'=> 'required',
+         'product_code'=> 'required',
+         'total_product'=> 'nullable',
+         'slug'=> 'required',
+         'isPublished'=> 'required',
+         'description'=> 'required'
+      ]);
+         // dd($validated);
+      $product = Product::create($validated);
       $images = $request->file('imageFile');
       if ($request->hasFile('imageFile')){
             foreach ($images as $image) {
                $random = substr(sha1(mt_rand()),17,10);
-               $imageName=$random.".".$image->getClientOriginalExtension();
+               $imageName = $random.".".$image->getClientOriginalExtension();
                Image::make($image)->resize(400,380)->save(base_path('public/product_image/'.$imageName));
 
-               // ProductImage::insert([
-               //    'image'=>$imageName,
-               //    'imageable_type'=>$sub_category_name,
-               //    // 'imageable_id'=>$sub_category_id,
-               //    // 'created_at'=>date('Y-m-d H:i:s'),
-               //    // 'updated_at'=>date('Y-m-d H:i:s')
-               // ]);
+               $image = new SiteImage();
+               $image->image = $imageName;
+
+               $product->images()->save($image);
             }
-      }else{
-         return back()->with('fail','The Image field is required.');
       }
 
-      // Product::insert([
-      //    'sub_category_id'=>$sub_category_id,
-      //    'title'=>$request->title,
-      //    'price'=>$request->price,
-      //    'product_code'=>$request->product_code,
-      //    'total_product'=>$request->total_product,
-      //    'slug'=>$request->slug,
-      //    'discount'=>$request->discount,
-      //    'isPublished'=>$request->isPublished,
-      //    'description'=>$request->description
-      // ]);
-
-
-       ProductExtraFeatures::insert([
-         'sub_category_id'=>$sub_category_id,
-         'size'=>$request->size,
-         'color'=>$request->color,
-         'quantity'=>$request->quantity
-      ]);
+       if (is_array($request->size)) {
+         for($i = 0; $i <= count($request->size) - 1; $i++){
+            ProductExtraFeatures::create([
+               'product_id' => $product->id,
+               'size' => $request->size[$i],
+               'color' => $request->color[$i],
+               'quantity' => $request->quantity[$i],
+            ]);
+         }
+       }
+      
 
       $categories = Category::all();      
       $subCategories = SubCategory::all();
