@@ -8,6 +8,10 @@ use App\SubCategory;
 use App\SiteImage;
 use App\Product;
 use App\ProductExtraFeatures;
+use App\Orders;
+use App\Comments;
+use App\Reviews;
+
 
 use Image;
 use Carbon\Carbon;
@@ -141,5 +145,24 @@ class CategoryController extends Controller{
       return view('admin/add-product', compact('categories','subCategories'));
 
    }
+
+// orders
+   public function order(){
+      $orders = Orders::all();
+      return view('admin/order', compact('orders'));
+   } 
+// comments
+   public function comments(){
+      $comments = Comments::all();
+      return view('admin/comments', compact('comments'));
+   } 
+// reviews
+   public function reviews(){
+      $reviews = Reviews::all();
+      return view('admin/reviews', compact('reviews'));
+   } 
+   
+
+
 
 }

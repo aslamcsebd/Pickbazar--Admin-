@@ -62,6 +62,9 @@
 </ul>
 </li>
 <li><a class="sidebar-header" href="{{ url('media') }}"><i data-feather="camera"></i><span>Media</span></a></li>
+
+<li><a class="sidebar-header" href="{{ url('comments') }}"><i data-feather="camera"></i><span>Comments</span></a></li>
+<li><a class="sidebar-header" href="{{ url('reviews') }}"><i data-feather="camera"></i><span>Reviews</span></a></li>
 <li><a class="sidebar-header" href="#"><i data-feather="align-left"></i><span>Menus</span><i class="fa fa-angle-right pull-right"></i></a>
 <ul class="sidebar-submenu">
 <li><a href="{{ url('menu-list') }}"><i class="fa fa-circle"></i>Menu Lists</a></li>

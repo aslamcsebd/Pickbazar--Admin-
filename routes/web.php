@@ -36,6 +36,12 @@ Route::get('add-product', 'CategoryController@add_product');
 Route::post('add-product-item', 'CategoryController@add_product_item');
 
 
+// orders
+Route::get('order', 'CategoryController@order');
+// comments
+Route::get('comments', 'CategoryController@comments');
+// reviews
+Route::get('reviews', 'CategoryController@reviews');
 
 
 

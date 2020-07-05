@@ -589,6 +589,7 @@ class ComposerStaticInit762775487da452f3bb66f9fa90532b93
     public static $classMap = array (
         'App\\Bussiness' => __DIR__ . '/../..' . '/app/Business.php',
         'App\\Category' => __DIR__ . '/../..' . '/app/Category.php',
+        'App\\Comments' => __DIR__ . '/../..' . '/app/Comments.php',
         'App\\Company' => __DIR__ . '/../..' . '/app/Company.php',
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
         'App\\DeliveryArea' => __DIR__ . '/../..' . '/app/DeliveryArea.php',
@@ -630,6 +631,7 @@ class ComposerStaticInit762775487da452f3bb66f9fa90532b93
         'App\\Providers\\BroadcastServiceProvider' => __DIR__ . '/../..' . '/app/Providers/BroadcastServiceProvider.php',
         'App\\Providers\\EventServiceProvider' => __DIR__ . '/../..' . '/app/Providers/EventServiceProvider.php',
         'App\\Providers\\RouteServiceProvider' => __DIR__ . '/../..' . '/app/Providers/RouteServiceProvider.php',
+        'App\\Reviews' => __DIR__ . '/../..' . '/app/Reviews.php',
         'App\\Role' => __DIR__ . '/../..' . '/app/Role.php',
         'App\\SiteImage' => __DIR__ . '/../..' . '/app/SiteImage.php',
         'App\\Staff' => __DIR__ . '/../..' . '/app/Staff.php',
