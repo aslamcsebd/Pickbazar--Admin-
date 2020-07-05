@@ -79,7 +79,7 @@ class CategoryController extends Controller{
 
 // product_list
    public function product_list(){
-      $product_lists = Product::all();
+      $product_lists = Product::orderBy('id','desc')->paginate('10');
       return view('admin/product-list', compact('product_lists'));
    }
    public function product_detail(){

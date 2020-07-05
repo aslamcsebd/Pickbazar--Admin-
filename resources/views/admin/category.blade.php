@@ -102,9 +102,14 @@
                         </thead>
                         <tbody>
                            @foreach($categories as $category)  {{-- foreach don't have @empty option --}}
+                          
                               <tr class="text-center">
                                  {{-- <td>{{$loop->index + $SingerLists->firstItem()}}</td> --}}
-                                 <td><img src="{{ asset('category_image') }}/{{$category->image}}" class="img-thumbnail"></td>    
+                                 <td>
+                                    @if ($category->image)
+                                        <img src="{{ asset('category_image') }}/{{ $category->image->image }}" class="img img-thumbnail" width="150" height="150">
+                                    @endif   
+                                 </td>    
                                  <td>{{ $category->name}}</td>
                                  {{-- <td>{{ $category->Category__relationTo__subCategory->name}}</td> --}}
                                  <td>Status</td>

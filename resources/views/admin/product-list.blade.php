@@ -27,7 +27,7 @@
    <div class="container-fluid">
       <div class="row products-admin ratio_asos">
          
-         <div class="col-xl-3 col-sm-6">
+         {{-- <div class="col-xl-3 col-sm-6">
             <div class="card product">
                <div class="card-body">
                   <div class="product-box p-0">
@@ -90,19 +90,32 @@
                   </div>
                </div>
             </div>
-         </div>
+         </div> --}}
 
-         @forelse($product_lists as $product_list)
+         @forelse($product_lists as $product)
+         {{-- @dd($product->images->first()->image) --}}
+         @php
+             $images = $product->images;
+            
+         @endphp
             <div class="col-xl-3 col-sm-6">
                <div class="card product">
                   <div class="card-body">
                      <div class="product-box p-0">
                         <div class="product-imgbox">
                            <div class="product-front">
-                              <img src="{{asset('assets/images/layout-2/product/3.jpg')}}" class="img-fluid  " alt="product">
+                              @if (count($images) > 0)
+                                 <img src="{{ asset('product_image') }}/{{ $images->first()->image ?? "" }}" class="img-fluid" alt="{{ $product->title }}">
+                              @else
+                                 <img src="{{ asset('assets/images/testimonial/1.jpg') }}" class="img-fluid" alt="{{ $product->title }}">
+                              @endif
                            </div>
                            <div class="product-back">
-                              <img src="../assets/images/layout-2/product/a3.jpg" class="img-fluid  " alt="product">
+                              @if (count($images) > 0)
+                                 <img src="{{ asset('product_image') }}/{{ $images->last()->image ?? "" }}" class="img-fluid" alt="{{ $product->title }}">
+                              @else
+                                 <img src="{{ asset('assets/images/testimonial/1.jpg') }}" class="img-fluid" alt="{{ $product->title }}">
+                              @endif
                            </div>
                            <div class="product-icon icon-inline">
                               <button>
@@ -131,17 +144,21 @@
                                  </div>
                                  <a href="">
                                     <h6 class="price-title">
-                                    reader will be distracted.
+                                    {{ $product->title }}
                                     </h6>
                                  </a>
                               </div>
                               <div class="detail-right">
                                  <div class="check-price">
-                                     {{ $product_list->price+5}}
+                                     @if ($product->discount > 0)
+                                          {{ $product->price - $product->discount}}
+                                     @else
+                                     0
+                                     @endif
                                  </div>
                                  <div class="price">
                                     <div class="price">
-                                      {{ $product_list->price}}
+                                     {{ $product->price }}
                                     </div>
                                  </div>
                               </div>

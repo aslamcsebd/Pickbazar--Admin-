@@ -105,7 +105,11 @@
                            @foreach($subCategories as $subCategory)  {{-- foreach don't have @empty option --}}
                               <tr class="text-center">
                                  {{-- <td>{{$loop->index + $SingerLists->firstItem()}}</td> --}}
-                                 <td><img src="{{ asset('category_image') }}/{{$subCategory->image}}" class="img-thumbnail"></td>    
+                                 <td>
+                                    @if ($category->image)
+                                        <img src="{{ asset('sub_category_image') }}/{{ $subCategory->image->image }}" class="img img-thumbnail" width="150" height="150">
+                                    @endif     
+                                 </td>    
                                  <td>{{ $subCategory->name}}</td>
                                  <td>{{ $subCategory->subCategory__relationTo__category->name}}</td>
                                  <td>Status</td>
