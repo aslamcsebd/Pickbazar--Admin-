@@ -25,4 +25,9 @@ class HomeController extends Controller
     {
         return view('admin.index');
     }
+
+     public function front()
+    {
+        return view('front/home');
+    }
 }
